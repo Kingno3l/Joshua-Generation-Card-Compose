@@ -19,7 +19,12 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.TextField
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 
@@ -30,7 +35,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             StateTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-CardColumn(modifier = Modifier.padding(innerPadding))
+
                 }
             }
         }
@@ -38,34 +43,24 @@ CardColumn(modifier = Modifier.padding(innerPadding))
 }
 
 @Composable
-fun CardItem(color: Color, modifier: Modifier = Modifier){
-    Box(
-        modifier = modifier
-            .fillMaxWidth()
-            .height(150.dp)
-            .background(color, shape = RoundedCornerShape(16.dp))
-            .padding(16.dp)
-    ) {
-        Text(
-            text = "Credit Card",
-            color = Color.White,
-            style = MaterialTheme.typography.headlineSmall
-        )
-    }
-}
+fun Greeting(){
+    //textfield, outlinedTextfiled, basictextfield
 
-@Composable
-fun CardColumn(modifier: Modifier = Modifier){
+    var enteredValue by remember {
+        mutableStateOf("")
+    }
     Column(
-        modifier = modifier
-            .fillMaxSize()
-            .padding(16.dp),
-        verticalArrangement = Arrangement.spacedBy(8.dp)
-    ){
-        CardItem(color = Color(0xFF1EB980))
-        CardItem(color = Color(0xFFFF5722))
-        CardItem(color = Color(0xFFCDDC39))
-        CardItem(color = Color(0xFF2196F3))
+        modifier = Modifier.fillMaxSize(),
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.Center
+    ) {
+        TextField(
+            value = enteredValue,
+            onValueChange = { newText -> enteredValue = newText },
+            label = { Text("Regular TextField") }
+        )
+
+        Text(text = "Input Text: $enteredValue")
     }
 }
 
@@ -75,6 +70,6 @@ fun CardColumn(modifier: Modifier = Modifier){
 @Composable
 fun GreetingPreview() {
     StateTheme {
-        CardColumn()
+        Greeting()
     }
 }
