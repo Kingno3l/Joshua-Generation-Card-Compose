@@ -30,7 +30,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             StateTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-
+CardColumn(modifier = Modifier.padding(innerPadding))
                 }
             }
         }
